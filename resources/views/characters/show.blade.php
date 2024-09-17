@@ -67,22 +67,26 @@
                         <div class="flex flex-col gap-1">
                             <label for="str" class="text-sm text-gray-500">STR</label>
                             <input type="number" id="str" name="str" value="{{ $character->str }}"
-                                min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                                min="2" max="17" class="border border-black h-6 w-10 text-center p-1"
+                                x-on:input.change.debounce="$el.closest('form').submit()" />
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="dex" class="text-sm text-gray-500">DEX</label>
                             <input type="number" id="dex" name="dex" value="{{ $character->dex }}"
-                                min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                                min="2" max="17" class="border border-black h-6 w-10 text-center p-1"
+                                x-on:input.change.debounce="$el.closest('form').submit()" />
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="wil" class="text-sm text-gray-500">WIL</label>
                             <input type="number" id="wil" name="wil" value="{{ $character->wil }}"
-                                min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                                min="2" max="17" class="border border-black h-6 w-10 text-center p-1"
+                                x-on:input.change.debounce="$el.closest('form').submit()" />
                         </div>
                         <div class="flex flex-col gap-1">
                             <label for="hrt" class="text-sm text-gray-500">HRT</label>
                             <input type="number" id="hrt" name="hrt" value="{{ $character->hrt }}"
-                                min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                                min="2" max="17" class="border border-black h-6 w-10 text-center p-1"
+                                x-on:input.change.debounce="$el.closest('form').submit()" />
                         </div>
                     </div>
                 </form>
