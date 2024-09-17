@@ -58,12 +58,34 @@ class CharacterController extends Controller
         return redirect(route('characters.index'));
     }
 
+    public function update(Request $request, string $id)
+    {
+        $current_user = $request->user();
+
+        /** @var \App\Models\Character $character */
+        $character = $current_user->characters()->findOrFail($id);
+        $updates = $request->all();
+        $updates['experience'] = 0;
+
+        for ($i = 0; $i < 8; $i++) {
+            if (isset($updates['experience-'.$i]) && $updates['experience-'.$i] === 'on') {
+                $updates['experience'] += 1;
+            } else {
+                break;
+            }
+        }
+
+        $character->update($updates);
+
+        return redirect(route('characters.show', $id));
+    }
+
     public function destroy(Request $request, string $id)
     {
         $current_user = $request->user();
 
         /** @var \App\Models\Character $character */
-        $character = $current_user->characters()->find($id);
+        $character = $current_user->characters()->findOrFail($id);
 
         $character->delete();
 

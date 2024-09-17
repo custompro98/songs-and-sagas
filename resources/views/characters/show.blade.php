@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="mx-auto max-w-screen-lg">
+    <div class="mx-auto max-w-screen-lg" x-data="{}">
         <div class="flex flex-row justify-between items-center">
             <h1 class="text-3xl font-bold">{{ $character->name }}</h1>
             <form action="{{ route('characters.destroy', $character->id) }}" method="POST">
@@ -12,66 +12,80 @@
         </div>
         <div class="grid grid-cols-2 gap-4 pt-4">
             <section>
-                <h2 class="text-2xl font-medium">Details</h2>
-                <div class="grid grid-cols-2 gap-4 pt-2">
-                    <div class="flex flex-col gap-1">
-                        <span class="text-sm text-gray-500">Pronouns</span>
-                        <span>{{ $character->pronouns }}</span>
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <span class="text-sm text-gray-500">Vanori</span>
-                        <span>{{ $character->vanori }}</span>
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <label for="resilience_current" class="text-sm text-gray-500">Resilience</label>
-                        <div>
-                            <input type="number" id="resilience_current" name="resilience_current"
-                                value="{{ $character->resilience_current }}" min="0"
-                                class="border border-black h-6 w-10 text-center p-1" />
-                            <span>/</span>
-                            <span>{{ $character->resilience_max }}</span>
+                <form action="{{ route('characters.update', $character->id) }}" method="POST">
+                    @csrf
+                    @method('patch')
+
+                    <h2 class="text-2xl font-medium">Details</h2>
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="flex flex-col gap-1">
+                            <span class="text-sm text-gray-500">Pronouns</span>
+                            <span>{{ $character->pronouns }}</span>
                         </div>
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <label for="armor" class="text-sm text-gray-500">Armor</label>
-                        <input type="number" id="armor" name="armor" value="{{ $character->armor }}"
-                            class="border border-black h-6 w-10 text-center p-1" />
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <label for="experience" class="text-sm text-gray-500">Experience</label>
-                        <div class="flex flex-row gap-1">
-                            @for ($j = 0; $j < 8; $j++)
-                                <input type="checkbox" id="experience-{{ $j }}"
-                                    name="experience-{{ $j }}"
-                                    {{ $character->experience > $j ? 'checked' : '' }} />
-                            @endfor
+                        <div class="flex flex-col gap-1">
+                            <span class="text-sm text-gray-500">Vanori</span>
+                            <span>{{ $character->vanori }}</span>
                         </div>
-                    </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="resilience_current" class="text-sm text-gray-500">Resilience</label>
+                            <div>
+                                <input type="number" id="resilience_current" name="resilience_current"
+                                    value="{{ $character->resilience_current }}" min="0"
+                                    max="{{ $character->resilience_max }}"
+                                    class="border border-black h-6 w-10 text-center p-1"
+                                    x-on:input.change.debounce="$el.closest('form').submit()" />
+                                <span>/</span>
+                                <span>{{ $character->resilience_max }}</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="armor" class="text-sm text-gray-500">Armor</label>
+                            <input type="number" id="armor" name="armor" value="{{ $character->armor }}"
+                                class="border border-black h-6 w-10 text-center p-1"
+                                x-on:input.change.debounce="$el.closest('form').submit()" />
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="experience" class="text-sm text-gray-500">Experience</label>
+                            <div class="flex flex-row gap-1">
+                                @for ($j = 0; $j < 8; $j++)
+                                    <input type="checkbox" id="experience-{{ $j }}"
+                                        name="experience-{{ $j }}"
+                                        x-on:click.debounce="$el.closest('form').submit()"
+                                        {{ $character->experience > $j ? 'checked' : '' }} />
+                                @endfor
+                            </div>
+                        </div>
+                </form>
             </section>
             <section>
-                <h2 class="text-2xl font-medium">Attributes</h2>
-                <div class="grid grid-cols-2 gap-4 pt-2">
-                    <div class="flex flex-col gap-1">
-                        <label for="str" class="text-sm text-gray-500">STR</label>
-                        <input type="number" id="str" name="str" value="{{ $character->str }}"
-                            min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                <form action="{{ route('characters.update', $character->id) }}" method="POST">
+                    @csrf
+                    @method('patch')
+
+                    <h2 class="text-2xl font-medium">Attributes</h2>
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="flex flex-col gap-1">
+                            <label for="str" class="text-sm text-gray-500">STR</label>
+                            <input type="number" id="str" name="str" value="{{ $character->str }}"
+                                min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="dex" class="text-sm text-gray-500">DEX</label>
+                            <input type="number" id="dex" name="dex" value="{{ $character->dex }}"
+                                min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="wil" class="text-sm text-gray-500">WIL</label>
+                            <input type="number" id="wil" name="wil" value="{{ $character->wil }}"
+                                min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="hrt" class="text-sm text-gray-500">HRT</label>
+                            <input type="number" id="hrt" name="hrt" value="{{ $character->hrt }}"
+                                min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-1">
-                        <label for="dex" class="text-sm text-gray-500">DEX</label>
-                        <input type="number" id="dex" name="dex" value="{{ $character->dex }}"
-                            min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <label for="wil" class="text-sm text-gray-500">WIL</label>
-                        <input type="number" id="wil" name="wil" value="{{ $character->wil }}"
-                            min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
-                    </div>
-                    <div class="flex flex-col gap-1">
-                        <label for="hrt" class="text-sm text-gray-500">HRT</label>
-                        <input type="number" id="hrt" name="hrt" value="{{ $character->hrt }}"
-                            min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
-                    </div>
-                </div>
+                </form>
             </section>
             <section>
                 <h2 class="text-2xl font-medium">Inventory</h2>
