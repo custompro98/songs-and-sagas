@@ -10,10 +10,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -31,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/characters/{characterId}/notes/{noteId}', [CharacterNoteController::class, 'destroy'])->name('characters.notes.destroy');
 
     Route::patch('/inventory_items/{id}', [InventoryItemController::class, 'update'])->name('inventory_items.update');
+
+    Route::get('/parties', [PartyController::class, 'index'])->name('parties.index');
 });
 
 require __DIR__.'/auth.php';
