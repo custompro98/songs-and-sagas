@@ -45,7 +45,7 @@
                                 x-on:input.change.debounce="$el.closest('form').submit()" />
                         </div>
                         <div class="flex flex-col gap-1">
-                            <label for="experience" class="text-sm text-gray-500">Experience</label>
+                            <span class="text-sm text-gray-500">Experience</span>
                             <div class="flex flex-row gap-1">
                                 @for ($j = 0; $j < 8; $j++)
                                     <input type="checkbox" id="experience-{{ $j }}"
@@ -92,24 +92,31 @@
                 <ul class="grid grid-cols-2">
                     @foreach ($character->inventoryItems()->get() as $item)
                         <li class="p-2 pl-0">
-                            <div class="flex flex-col gap-1">
-                                <label for="item-{{ $item->id }}" class="text-sm text-gray-500">Item</label>
-                                <input type="text" name="item-{{ $item->id }}" id="item-{{ $item->id }}"
-                                    value="{{ $item->name }}" class="border border-black h-6 w-48 p-1" />
-                            </div>
-                            <div class="flex flex-col gap-1">
-                                <label for="item-note-{{ $item->id }}" class="text-sm text-gray-500">Note</label>
-                                <input type="text" name="item-note-{{ $item->id }}"
-                                    id="item-note-{{ $item->id }}" value="{{ $item->name }}"
-                                    class="border border-black h-6 w-48 p-1" />
-                            </div>
-                            <div class="flex flex-col gap-1">
-                                <label for="item-quantity-{{ $item->id }}"
-                                    class="text-sm text-gray-500">Quantity</label>
-                                <input type="text" name="item-quantity-{{ $item->id }}"
-                                    id="item-quantity-{{ $item->id }}" value="{{ $item->quantity }}"
-                                    class="border border-black h-6 w-48 p-1" />
-                            </div>
+                            <form action="{{ route('inventory_items.update', $item->id) }}" method="POST">
+                                @csrf
+                                @method('patch')
+
+                                <div class="flex flex-col gap-1">
+                                    <label for="item-{{ $item->id }}" class="text-sm text-gray-500">Item</label>
+                                    <input type="text" name="name" id="item-{{ $item->id }}"
+                                        value="{{ $item->name }}" class="border border-black h-6 w-48 p-1"
+                                        x-on:input.debounce.500ms="$el.closest('form').submit()" />
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label for="item-note-{{ $item->id }}"
+                                        class="text-sm text-gray-500">Note</label>
+                                    <input type="text" name="note" id="item-note-{{ $item->id }}"
+                                        value="{{ $item->note }}" class="border border-black h-6 w-48 p-1"
+                                        x-on:input.debounce.500ms="$el.closest('form').submit()" />
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label for="item-quantity-{{ $item->id }}"
+                                        class="text-sm text-gray-500">Quantity</label>
+                                    <input type="text" name="quantity" id="item-quantity-{{ $item->id }}"
+                                        value="{{ $item->quantity }}" class="border border-black h-6 w-48 p-1"
+                                        x-on:input.debounce.500ms="$el.closest('form').submit()" />
+                                </div>
+                            </form>
                         </li>
                     @endforeach
                 </ul>

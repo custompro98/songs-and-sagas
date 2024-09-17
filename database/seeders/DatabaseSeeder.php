@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        $user->characters()->createMany([
+        $characters = $user->characters()->createMany([
             [
                 'name' => 'Uldrid',
                 'pronouns' => 'they/them',
@@ -48,5 +48,18 @@ class DatabaseSeeder extends Seeder
                 'armor' => 4,
             ],
         ]);
+
+        foreach ($characters as $character) {
+            $inventory = $character->inventory()->create();
+
+            $inventory->inventoryItems()->createMany([
+                ['name' => 'Sword', 'note' => 'd6 damage', 'quantity' => 1],
+                ['name' => '', 'note' => '', 'quantity' => 0],
+                ['name' => 'Torches', 'note' => 'emit light for 1 hour', 'quantity' => 10],
+                ['name' => '', 'note' => '', 'quantity' => 0],
+                ['name' => 'Backpack', 'note' => 'Does not add additional carrying capacity', 'quantity' => 1],
+                ['name' => '', 'note' => '', 'quantity' => 0],
+            ]);
+        }
     }
 }

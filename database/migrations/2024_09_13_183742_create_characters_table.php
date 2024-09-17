@@ -53,9 +53,9 @@ return new class extends Migration
         Schema::create('inventory_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('inventory_id')->references('id')->on('inventories')->onDelete('cascade');
-            $table->string('name');
-            $table->string('note');
-            $table->integer('quantity');
+            $table->string('name')->nullable();
+            $table->string('note')->nullable();
+            $table->integer('quantity')->default(0);
 
             $table->timestamps();
         });
