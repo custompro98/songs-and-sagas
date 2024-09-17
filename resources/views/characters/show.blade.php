@@ -1,0 +1,130 @@
+<x-app-layout>
+    <div class="mx-auto max-w-screen-lg">
+        <div class="flex flex-row justify-between items-center">
+            <h1 class="text-3xl font-bold">{{ $character->name }}</h1>
+            <form action="{{ route('characters.destroy', $character->id) }}" method="POST">
+                @csrf
+                @method('delete')
+
+                <input type="submit" value="Delete"
+                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" />
+            </form>
+        </div>
+        <div class="grid grid-cols-2 gap-4 pt-4">
+            <section>
+                <h2 class="text-2xl font-medium">Details</h2>
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-sm text-gray-500">Pronouns</span>
+                        <span>{{ $character->pronouns }}</span>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span class="text-sm text-gray-500">Vanori</span>
+                        <span>{{ $character->vanori }}</span>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="resilience_current" class="text-sm text-gray-500">Resilience</label>
+                        <div>
+                            <input type="number" id="resilience_current" name="resilience_current"
+                                value="{{ $character->resilience_current }}" min="0"
+                                class="border border-black h-6 w-10 text-center p-1" />
+                            <span>/</span>
+                            <span>{{ $character->resilience_max }}</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="armor" class="text-sm text-gray-500">Armor</label>
+                        <input type="number" id="armor" name="armor" value="{{ $character->armor }}"
+                            class="border border-black h-6 w-10 text-center p-1" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="experience" class="text-sm text-gray-500">Experience</label>
+                        <div class="flex flex-row gap-1">
+                            @for ($j = 0; $j < 8; $j++)
+                                <input type="checkbox" id="experience-{{ $j }}"
+                                    name="experience-{{ $j }}"
+                                    {{ $character->experience > $j ? 'checked' : '' }} />
+                            @endfor
+                        </div>
+                    </div>
+            </section>
+            <section>
+                <h2 class="text-2xl font-medium">Attributes</h2>
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                    <div class="flex flex-col gap-1">
+                        <label for="str" class="text-sm text-gray-500">STR</label>
+                        <input type="number" id="str" name="str" value="{{ $character->str }}"
+                            min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="dex" class="text-sm text-gray-500">DEX</label>
+                        <input type="number" id="dex" name="dex" value="{{ $character->dex }}"
+                            min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="wil" class="text-sm text-gray-500">WIL</label>
+                        <input type="number" id="wil" name="wil" value="{{ $character->wil }}"
+                            min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="hrt" class="text-sm text-gray-500">HRT</label>
+                        <input type="number" id="hrt" name="hrt" value="{{ $character->hrt }}"
+                            min="2" max="17" class="border border-black h-6 w-10 text-center p-1" />
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2 class="text-2xl font-medium">Inventory</h2>
+                <ul class="grid grid-cols-2">
+                    @foreach ($character->inventoryItems()->get() as $item)
+                        <li class="p-2 pl-0">
+                            <div class="flex flex-col gap-1">
+                                <label for="item-{{ $item->id }}" class="text-sm text-gray-500">Item</label>
+                                <input type="text" name="item-{{ $item->id }}" id="item-{{ $item->id }}"
+                                    value="{{ $item->name }}" class="border border-black h-6 w-48 p-1" />
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label for="item-note-{{ $item->id }}" class="text-sm text-gray-500">Note</label>
+                                <input type="text" name="item-note-{{ $item->id }}"
+                                    id="item-note-{{ $item->id }}" value="{{ $item->name }}"
+                                    class="border border-black h-6 w-48 p-1" />
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label for="item-quantity-{{ $item->id }}"
+                                    class="text-sm text-gray-500">Quantity</label>
+                                <input type="text" name="item-quantity-{{ $item->id }}"
+                                    id="item-quantity-{{ $item->id }}" value="{{ $item->quantity }}"
+                                    class="border border-black h-6 w-48 p-1" />
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </section>
+            <section>
+                <h2 class="text-2xl font-medium">Notes</h2>
+                <div class="pt-2">
+                    <form action="{{ route('characters.notes.store', $character->id) }}" method="POST">
+                        @csrf
+
+                        <input type="text" id="note" name="note" class="border border-black w-full"
+                            placeholder="{{ $character->name }} discovered something about themselves..." />
+                    </form>
+                    <ul>
+                        @foreach ($character->notes()->get() as $note)
+                            <li class="flex flex-row gap-1">
+                                <form
+                                    action="{{ route('characters.notes.destroy', ['characterId' => $character->id, 'noteId' => $note->id]) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <input type="submit" value="x" class="text-red-700 cursor-pointer" />
+                                </form>
+                                {{ $note->note }}
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+</x-app-layout>

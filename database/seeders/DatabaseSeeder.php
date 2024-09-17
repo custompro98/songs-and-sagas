@@ -15,9 +15,38 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+
+        $user->characters()->createMany([
+            [
+                'name' => 'Uldrid',
+                'pronouns' => 'they/them',
+                'vanori' => 'Ox',
+                'str' => '1',
+                'dex' => '0',
+                'wil' => '3',
+                'hrt' => '-1',
+                'resilience_current' => 10,
+                'resilience_max' => 13,
+                'experience' => 0,
+                'armor' => 4,
+            ],
+            [
+                'name' => 'Filbeard',
+                'pronouns' => 'he/him',
+                'vanori' => 'Raven',
+                'str' => '0',
+                'dex' => '+2',
+                'wil' => '-1',
+                'hrt' => '+1',
+                'resilience_current' => 5,
+                'resilience_max' => 9,
+                'experience' => 0,
+                'armor' => 4,
+            ],
         ]);
     }
 }
