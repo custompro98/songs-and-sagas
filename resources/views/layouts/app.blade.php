@@ -23,8 +23,8 @@
     <main class="mb-auto p-4">
         {{ $slot }}
     </main>
-    <footer class="flex h-24 flex-col justify-center items-center bg-gray-300 p-4 text-black gap-4 mt-4">
-        <p>
+    <footer class="flex min-h-24 flex-col justify-center items-center bg-gray-300 p-4 text-black gap-4 mt-4">
+        <p class="text-center">
             This work is based on Songs and Sagas, product of <a href="https://farirpgs.com" class="underline">Fari
                 RPGs</a>, developed
             and authored
