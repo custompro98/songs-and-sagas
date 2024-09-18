@@ -12,6 +12,7 @@
         "staudenmeir/belongs-to-through": "^2.5"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.1",
         "laravel/breeze": "^2.2",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
