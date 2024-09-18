@@ -12,6 +12,6 @@ class InventoryItemController extends Controller
         $item = InventoryItem::findOrFail($id);
         $item->update($request->all());
 
-        return redirect()->route('characters.show', $item->character->id);
+        return redirect(route('characters.show', $item->character->id));
     }
 }

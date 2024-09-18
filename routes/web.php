@@ -3,6 +3,8 @@
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\CharacterNoteController;
 use App\Http\Controllers\InventoryItemController;
+use App\Http\Controllers\PartyController;
+use App\Http\Controllers\PartyMemberController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/inventory_items/{id}', [InventoryItemController::class, 'update'])->name('inventory_items.update');
 
     Route::get('/parties', [PartyController::class, 'index'])->name('parties.index');
+    Route::post('/parties', [PartyController::class, 'store'])->name('parties.store');
+    Route::get('/parties/{id}', [PartyController::class, 'show'])->name('parties.show');
+
+    Route::post('/party_members', [PartyMemberController::class, 'store'])->name('party_members.store');
 });
 
 require __DIR__.'/auth.php';

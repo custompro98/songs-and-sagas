@@ -150,6 +150,31 @@
                     </ul>
                 </div>
             </section>
+            <section>
+                <h2 class="text-2xl font-medium">Parties</h2>
+                <div class="pt-2">
+                    <ul>
+                        @if ($character->parties()->count() > 0)
+                            @foreach ($character->parties()->get() as $party)
+                                <li class="flex flex-row gap-1">
+                                    <a href="{{ route('parties.show', $party->id) }}"
+                                        class="underline text-blue-500">{{ $party->name }}</a>
+                                </li>
+                            @endforeach
+                        @else
+                            <li>No obligations...<em>yet</em>.</li>
+                        @endif
+                    </ul>
+                    <form action="{{ route('party_members.store') }}" method="POST">
+                        @csrf
+
+                        <input type="hidden" name="characterId" value="{{ $character->id }}" />
+                        <input type="text" name="joinCode" placeholder="dOVuWeFrCUUzNXFh"
+                            class="border border-black h-6 w-48 p-1" />
+                        <input type="submit" value="Join" class="p-2" />
+                    </form>
+                </div>
+            </section>
         </div>
     </div>
 </x-app-layout>

@@ -12,10 +12,10 @@
                         <th class="p-2 border-2 border-black">DEX</th>
                         <th class="p-2 border-2 border-black">WIL</th>
                         <th class="p-2 border-2 border-black">HRT</th>
+                        <th class="p-2 border-2 border-black">Armor</th>
                         <th class="p-2 border-2 border-black">Current Resilience</th>
                         <th class="p-2 border-2 border-black">Max Resilience</th>
                         <th class="p-2 border-2 border-black">Experience</th>
-                        <th class="p-2 border-2 border-black">Armor</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,10 +30,10 @@
                             <td class="p-2 border-2 border-black">{{ $character->dex }}</td>
                             <td class="p-2 border-2 border-black">{{ $character->wil }}</td>
                             <td class="p-2 border-2 border-black">{{ $character->hrt }}</td>
+                            <td class="p-2 border-2 border-black">{{ $character->armor }}</td>
                             <td class="p-2 border-2 border-black">{{ $character->resilience_current }}</td>
                             <td class="p-2 border-2 border-black">{{ $character->resilience_max }}</td>
                             <td class="p-2 border-2 border-black">{{ $character->experience }}</td>
-                            <td class="p-2 border-2 border-black">{{ $character->armor }}</td>
                         </tr>
                     @endforeach
                     <tr>

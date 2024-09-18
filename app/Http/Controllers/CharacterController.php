@@ -55,7 +55,7 @@ class CharacterController extends Controller
             ['name' => '', 'note' => '', 'quantity' => 0],
         ]);
 
-        return redirect(route('characters.index'));
+        return redirect(route('characters.show', $character->id));
     }
 
     public function update(Request $request, string $id)
@@ -77,7 +77,7 @@ class CharacterController extends Controller
 
         $character->update($updates);
 
-        return redirect(route('characters.show', $id));
+        return redirect(route('characters.show', $character->id));
     }
 
     public function destroy(Request $request, string $id)
