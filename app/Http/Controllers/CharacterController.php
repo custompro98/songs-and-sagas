@@ -3,32 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CharacterController extends Controller
 {
     public function index(Request $request)
     {
-        $current_user = $request->user();
+        $current_user = Auth::user();
 
         /** @var \App\Models\Character[] $characters */
         $characters = $current_user->characters()->get();
 
-        return view('characters.index', ['characters' => $characters, 'user' => $current_user]);
+        return view('characters.index', ['characters' => $characters]);
     }
 
     public function show(Request $request, string $id)
     {
-        $current_user = $request->user();
+        $current_user = Auth::user();
 
         /** @var \App\Models\Character $character */
         $character = $current_user->characters()->find($id);
 
-        return view('characters.show', ['character' => $character, 'user' => $current_user]);
+        return view('characters.show', ['character' => $character]);
     }
 
     public function generate(Request $request)
     {
-        $current_user = $request->user();
+        $current_user = Auth::user();
 
         $character = $current_user->characters()->create([
             'name' => 'Ilnir',
@@ -60,7 +61,7 @@ class CharacterController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $current_user = $request->user();
+        $current_user = Auth::user();
 
         /** @var \App\Models\Character $character */
         $character = $current_user->characters()->findOrFail($id);
@@ -82,7 +83,7 @@ class CharacterController extends Controller
 
     public function destroy(Request $request, string $id)
     {
-        $current_user = $request->user();
+        $current_user = Auth::user();
 
         /** @var \App\Models\Character $character */
         $character = $current_user->characters()->findOrFail($id);

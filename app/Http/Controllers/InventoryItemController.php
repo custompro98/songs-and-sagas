@@ -9,6 +9,7 @@ class InventoryItemController extends Controller
 {
     public function update(Request $request, $id)
     {
+
         $item = InventoryItem::findOrFail($id);
         $item->update($request->all());
 
