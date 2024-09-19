@@ -16,7 +16,7 @@
                 <td class="p-2 border-2 border-black">{{ $party->join_code }}</td>
             </tr>
         @endforeach
-        <tr>
+        <tr class="bg-white">
             <td class="p-2 border-2 border-black text-center hover:bg-slate-300 cursor-pointer" colspan="11">
                 <form action="{{ route('parties.store') }}" method="POST">
                     @csrf
