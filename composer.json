@@ -1,9 +1,14 @@
 {
-    "name": "laravel/laravel",
+    "name": "custompro98/songs-and-sagas",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
-    "license": "MIT",
+    "description": "Songs and Sagas character and party management",
+    "keywords": [
+        "songs",
+        "sagas",
+        "rpg",
+        "fari"
+    ],
+    "license": "Creative Commons Attribution 4.0 License",
     "require": {
         "php": "^8.2",
         "fakerphp/faker": "^1.23",
