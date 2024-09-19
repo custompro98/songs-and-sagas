@@ -4,7 +4,7 @@
 
 @layer base {
   input[type="number"] {
-      apperance: textfield;
+      appearance: textfield;
   }
 
   input[type="number"]::-webkit-inner-spin-button,
