@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Contexts\Character\GenerateCharacterContext;
+use App\Interactors\Character\GenerateCharacter;
+use App\Popos\Card\Deck;
+use Faker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,19 +35,10 @@ class CharacterController extends Controller
     {
         $current_user = Auth::user();
 
-        $character = $current_user->characters()->create([
-            'name' => 'Ilnir',
-            'pronouns' => 'he/him',
-            'vanori' => 'Elk',
-            'str' => 1,
-            'dex' => 1,
-            'wil' => 1,
-            'hrt' => 1,
-            'resilience_current' => 10,
-            'resilience_max' => 10,
-            'experience' => 0,
-            'armor' => 4,
-        ]);
+        $context = new GenerateCharacterContext(Faker\Factory::create(), new Deck);
+        $generator = new GenerateCharacter($context);
+        $model = $generator->call();
+        $character = $current_user->characters()->save($model);
 
         $inventory = $character->inventory()->createQuietly();
 
