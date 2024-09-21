@@ -63,8 +63,8 @@ class PartyController extends Controller
      *
      * SELECT parties.*
      * FROM parties p
-     * JOIN party_members pm ON pm.party_id = p.id
-     * JOIN characters c ON c.id = pm.character_id
+     * LEFT JOIN party_members pm ON pm.party_id = p.id
+     * LEFT JOIN characters c ON c.id = pm.character_id
      * WHERE (
      *          c.user_id = <current_user_id>
      *       OR p.user_id = <current_user_id>
@@ -75,15 +75,13 @@ class PartyController extends Controller
     {
         return DB::table('parties')
             ->selectRaw('parties.*, count(characters.id) as size')
-            ->join('party_members', 'parties.id', '=', 'party_members.party_id')
-            ->join('characters', 'party_members.character_id', '=', 'characters.id')
+            ->leftJoin('party_members', 'parties.id', '=', 'party_members.party_id')
+            ->leftJoin('characters', 'party_members.character_id', '=', 'characters.id')
             ->where(function ($query) use ($user_id) {
                 $query
                     ->where('parties.user_id', $user_id)
                     ->orWhere('characters.user_id', $user_id);
             })
-            // ->where('parties.user_id', $user_id)
-            // ->orWhere('characters.user_id', $user_id)
             ->groupBy('parties.id');
 
     }
