@@ -5,8 +5,11 @@
             <form action="{{ route('parties.store') }}" method="POST" class="flex items-center">
                 @csrf
 
-                <input type="submit" value="Create"
-                    class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900" />
+                <button
+                    class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
+                    <span class="hidden md:inline">Create</span>
+                    <x-icon-plus class="size-6 inline md:hidden" />
+                </button>
             </form>
         </div>
         <div class="md:flex justify-center hidden">
