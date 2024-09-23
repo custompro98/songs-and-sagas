@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePartyRequest;
 use App\Models\Party;
 use App\Models\PartyMember;
 use Faker;
@@ -40,7 +41,26 @@ class PartyController extends Controller
         );
     }
 
-    public function store()
+    public function create()
+    {
+        $current_user = Auth::user();
+
+        return view('parties.create', ['current_user' => $current_user]);
+    }
+
+    public function store(StorePartyRequest $request)
+    {
+        $current_user = Auth::user();
+        $party = $current_user->parties()->create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'join_code' => Str::random(),
+        ]);
+
+        return redirect()->route('parties.show', $party->id);
+    }
+
+    public function generate()
     {
         $current_user = Auth::user();
         $faker = Faker\Factory::create();

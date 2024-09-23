@@ -36,7 +36,8 @@ Route::middleware('auth')->group(function () {
      */
 
     // Parties
-    Route::resource('parties', PartyController::class)->only(['index', 'store', 'show']);
+    Route::post('/parties/generate', [PartyController::class, 'generate'])->name('parties.generate');
+    Route::resource('parties', PartyController::class)->only(['index', 'create', 'store', 'show']);
 
     // Party Members
     Route::resource('party_members', PartyMemberController::class)->only(['store']);

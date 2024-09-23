@@ -20,12 +20,12 @@
             </tr>
         @endforeach
         <tr class="bg-white">
-            <td class="p-2 border-2 border-black text-center hover:bg-slate-300 cursor-pointer" colspan="11">
-                <form action="{{ route('parties.store') }}" method="POST">
+            <td class="p-2 border-2 border-black text-center hover:bg-slate-300" colspan="11">
+                <form action="{{ route('parties.generate') }}" method="POST">
                     @csrf
 
                     <button>
-                        <x-icon-plus class="size-6 inline" />
+                        <span>Generate</span>
                     </button>
                 </form>
             </td>
