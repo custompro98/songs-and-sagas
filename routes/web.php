@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('characters', CharacterController::class)->except(['create', 'store', 'edit']);
 
     // Character Notes
-    Route::resource('characters.notes', CharacterNoteController::class)->only(['store', 'destroy'])->shallow();
+    Route::resource('characters.notes', CharacterNoteController::class)->only(['store', 'update', 'destroy'])->shallow();
 
     // Inventory Items
     Route::resource('characters.inventory_items', InventoryItemController::class)->only(['update'])->shallow();

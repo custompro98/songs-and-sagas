@@ -17,6 +17,15 @@ class CharacterNoteController extends Controller
         return redirect(route('characters.show', $character->id));
     }
 
+    public function update(Request $request, CharacterNote $note)
+    {
+        $note->update([
+            'note' => $request->input('note'),
+        ]);
+
+        return redirect(route('characters.show', $note->character->id));
+    }
+
     public function destroy(Character $character, CharacterNote $note)
     {
         $character = $note->character()->first();

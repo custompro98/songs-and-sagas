@@ -137,15 +137,34 @@
                         <input type="text" id="note" name="note" class="border border-black w-full"
                             placeholder="{{ $character->name }} discovered something about themselves..." />
                     </form>
-                    <ul>
+                    <ul class="pt-2 grid grid-cols-1 gap-2">
                         @foreach ($character->notes()->get() as $note)
-                            <li class="flex flex-row gap-1">
-                                <form action="{{ route('notes.destroy', $note->id) }}" method="POST">
+                            <li class="grid grid-cols-12 gap-1 items-center justify-center p-2"
+                                x-data="{ edit: false }">
+                                <form action="{{ route('notes.destroy', $note->id) }}" method="POST"
+                                    class="grid grid-cols-subgrid">
                                     @csrf
                                     @method('delete')
-                                    <input type="submit" value="x" class="text-red-700 cursor-pointer" />
+
+                                    <button>
+                                        <x-icon-x-mark class="size-5 text-red-700" />
+                                    </button>
                                 </form>
-                                {{ $note->note }}
+                                <div class="col-span-10">
+                                    <p x-show="!edit">{{ $note->note }}</p>
+                                    <form action="{{ route('notes.destroy', $note->id) }}" method="POST"
+                                        x-show="edit">
+                                        @csrf
+                                        @method('patch')
+
+                                        <input type="text" id="note" name="note"
+                                            class="border border-black w-full h-6" value="{{ $note->note }}"
+                                            placeholder="{{ $character->name }} discovered something about themselves..." />
+                                    </form>
+                                </div>
+                                <button x-on:click="edit = !edit">
+                                    <x-icon-pencil-square class="size-5" />
+                                </button>
                             </li>
                         @endforeach
                     </ul>
