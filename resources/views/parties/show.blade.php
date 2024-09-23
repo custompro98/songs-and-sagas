@@ -17,7 +17,12 @@
                     </div>
                     <div class="flex flex-col gap-1">
                         <span class="text-sm text-gray-500">Join code</span>
-                        <span>{{ $party->join_code }}</span>
+                        <div class="flex flex-row gap-1 items-center">
+                            <span>{{ $party->join_code }}</span>
+                            <button x-clipboard.raw="{{ $party->join_code }}">
+                                <x-icon-square-2-stack class="size-5 text-gray-500" />
+                            </button>
+                        </div>
                     </div>
             </section>
             <section>
