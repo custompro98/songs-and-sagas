@@ -18,10 +18,8 @@
                     <div class="flex flex-col gap-1">
                         <span class="text-sm text-gray-500">Join code</span>
                         <div class="flex flex-row gap-1 items-center">
-                            <span>{{ $party->join_code }}</span>
-                            <button x-clipboard.raw="{{ $party->join_code }}">
-                                <x-icon-square-2-stack class="size-5 text-gray-500" />
-                            </button>
+                            <x-button-copy showText="{{ $party->join_code }}" copyText="{{ $party->join_code }}"
+                                class="size-5 inline text-gray-500 hover:text-gray-600 active:text-gray-900" />
                         </div>
                     </div>
             </section>

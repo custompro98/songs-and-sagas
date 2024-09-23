@@ -13,7 +13,10 @@
                     <a href="{{ route('parties.show', $party->id) }}">{{ $party->name }}</a>
                 </td>
                 <td class="p-2 border-2 border-black">{{ $party->size }}</td>
-                <td class="p-2 border-2 border-black">{{ $party->join_code }}</td>
+                <td class="p-2 border-2 border-black" x-data="{}">
+                    <x-button-copy showText="{{ $party->join_code }}" copyText="{{ $party->join_code }}"
+                        class="size-5 inline text-gray-500 hover:text-gray-600 active:text-gray-900" />
+                </td>
             </tr>
         @endforeach
         <tr class="bg-white">
