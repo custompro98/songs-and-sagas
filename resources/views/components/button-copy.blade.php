@@ -1,6 +1,6 @@
 @props(['copyText', 'notificationText' => 'Copied!', 'showText', 'class'])
 
-<div class="flex flex-row gap-1 justify-center w-fit md:w-auto" x-data="{
+<div class="flex flex-row gap-1 md:justify-center" x-data="{
     copyText: {{ $copyText }},
     copyNotification: false,
     copyToClipboard() {
@@ -31,5 +31,5 @@
             <x-icon-square-2-stack class="{{ $class }}" />
         </button>
     </div>
-    <p>{{ $showText }}</p>
+    <p class="truncate">{{ $showText }}</p>
 </div>
