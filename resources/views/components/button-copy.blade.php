@@ -1,6 +1,6 @@
 @props(['copyText', 'notificationText' => 'Copied!', 'showText', 'class'])
 
-<div class="flex flex-row gap-1 md:justify-center" x-data="{
+<div class="flex flex-row gap-1 w-full md:justify-center" x-data="{
     copyText: {{ $copyText }},
     copyNotification: false,
     copyToClipboard() {
