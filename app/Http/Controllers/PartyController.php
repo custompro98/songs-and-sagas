@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Party;
 use App\Models\PartyMember;
 use Faker;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class PartyController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $current_user = Auth::user();
         $parties = $this->parties($current_user->id)->get();
@@ -19,13 +19,9 @@ class PartyController extends Controller
         return view('parties.index', ['parties' => $parties]);
     }
 
-    public function show(Request $request, string $id)
+    public function show(Party $party)
     {
         $current_user = Auth::user();
-        $party = $this
-            ->parties($current_user->id)
-            ->where('parties.id', $id)
-            ->firstOrFail();
 
         $characters = PartyMember::where('party_id', $party->id)
             ->with('character')
@@ -44,7 +40,7 @@ class PartyController extends Controller
         );
     }
 
-    public function store(Request $request)
+    public function store()
     {
         $current_user = Auth::user();
         $faker = Faker\Factory::create();

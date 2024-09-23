@@ -140,9 +140,7 @@
                     <ul>
                         @foreach ($character->notes()->get() as $note)
                             <li class="flex flex-row gap-1">
-                                <form
-                                    action="{{ route('characters.notes.destroy', ['characterId' => $character->id, 'noteId' => $note->id]) }}"
-                                    method="POST">
+                                <form action="{{ route('notes.destroy', $note->id) }}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <input type="submit" value="x" class="text-red-700 cursor-pointer" />

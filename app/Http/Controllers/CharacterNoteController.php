@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Character;
+use App\Models\CharacterNote;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CharacterNoteController extends Controller
 {
-    public function store(Request $request, string $characterId)
+    public function store(Request $request, Character $character)
     {
-        $current_user = Auth::user();
-        $character = $current_user->characters()->findOrFail($characterId);
         $character->notes()->create([
             'note' => $request->input('note'),
         ]);
@@ -18,11 +17,10 @@ class CharacterNoteController extends Controller
         return redirect(route('characters.show', $character->id));
     }
 
-    public function destroy(Request $request, string $characterId, string $noteId)
+    public function destroy(Character $character, CharacterNote $note)
     {
-        $current_user = Auth::user();
-        $character = $current_user->characters()->findOrFail($characterId);
-        $character->notes()->find($noteId)->delete();
+        $character = $note->character()->first();
+        $note->delete();
 
         return redirect(route('characters.show', $character->id));
     }

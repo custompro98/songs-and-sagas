@@ -22,30 +22,24 @@ Route::middleware('auth')->group(function () {
      */
 
     // Characters
-    Route::get('/characters', [CharacterController::class, 'index'])->name('characters.index');
-    Route::get('/characters/{id}', [CharacterController::class, 'show'])->name('characters.show');
     Route::post('/characters/generate', [CharacterController::class, 'generate'])->name('characters.generate');
-    Route::patch('/characters/{id}', [CharacterController::class, 'update'])->name('characters.update');
-    Route::delete('/characters/{id}', [CharacterController::class, 'destroy'])->name('characters.destroy');
+    Route::resource('characters', CharacterController::class)->except(['create', 'store', 'edit']);
 
     // Character Notes
-    Route::post('/characters/{characterId}/notes', [CharacterNoteController::class, 'store'])->name('characters.notes.store');
-    Route::delete('/characters/{characterId}/notes/{noteId}', [CharacterNoteController::class, 'destroy'])->name('characters.notes.destroy');
+    Route::resource('characters.notes', CharacterNoteController::class)->only(['store', 'destroy'])->shallow();
 
     // Inventory Items
-    Route::patch('/inventory_items/{id}', [InventoryItemController::class, 'update'])->name('inventory_items.update');
+    Route::resource('characters.inventory_items', InventoryItemController::class)->only(['update'])->shallow();
 
     /*
      * Party Routes
      */
 
     // Parties
-    Route::get('/parties', [PartyController::class, 'index'])->name('parties.index');
-    Route::post('/parties', [PartyController::class, 'store'])->name('parties.store');
-    Route::get('/parties/{id}', [PartyController::class, 'show'])->name('parties.show');
+    Route::resource('parties', PartyController::class)->only(['index', 'store', 'show']);
 
     // Party Members
-    Route::post('/party_members', [PartyMemberController::class, 'store'])->name('party_members.store');
+    Route::resource('party_members', PartyMemberController::class)->only(['store']);
 });
 
 require __DIR__.'/auth.php';

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contexts\Character\GenerateCharacterContext;
 use App\Interactors\Character\GenerateCharacter;
+use App\Models\Character;
 use App\Popos\Card\Deck;
 use Faker;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CharacterController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $current_user = Auth::user();
 
@@ -21,17 +22,12 @@ class CharacterController extends Controller
         return view('characters.index', ['characters' => $characters]);
     }
 
-    public function show(Request $request, string $id)
+    public function show(Character $character)
     {
-        $current_user = Auth::user();
-
-        /** @var \App\Models\Character $character */
-        $character = $current_user->characters()->find($id);
-
         return view('characters.show', ['character' => $character]);
     }
 
-    public function generate(Request $request)
+    public function generate()
     {
         $current_user = Auth::user();
 
@@ -54,12 +50,8 @@ class CharacterController extends Controller
         return redirect(route('characters.show', $character->id));
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, Character $character)
     {
-        $current_user = Auth::user();
-
-        /** @var \App\Models\Character $character */
-        $character = $current_user->characters()->findOrFail($id);
         $updates = $request->all();
         $updates['experience'] = 0;
 
@@ -76,13 +68,8 @@ class CharacterController extends Controller
         return redirect(route('characters.show', $character->id));
     }
 
-    public function destroy(Request $request, string $id)
+    public function destroy(Character $character)
     {
-        $current_user = Auth::user();
-
-        /** @var \App\Models\Character $character */
-        $character = $current_user->characters()->findOrFail($id);
-
         $character->delete();
 
         return redirect(route('characters.index'));
