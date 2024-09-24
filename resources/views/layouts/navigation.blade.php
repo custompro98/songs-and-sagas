@@ -12,10 +12,10 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('characters.index')" :active="request()->routeIs('characters.index')">
+                    <x-nav-link :href="route('characters.index')" :active="request()->routeIs('characters.*')">
                         {{ __('Characters') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('parties.index')" :active="request()->routeIs('parties.index')">
+                    <x-nav-link :href="route('parties.index')" :active="request()->routeIs('parties.*')">
                         {{ __('Parties') }}
                     </x-nav-link>
                 </div>
@@ -78,10 +78,10 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('characters.index')" :active="request()->routeIs('characters.index')">
+            <x-responsive-nav-link :href="route('characters.index')" :active="request()->routeIs('characters.*')">
                 {{ __('Characters') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('parties.index')" :active="request()->routeIs('parties.index')">
+            <x-responsive-nav-link :href="route('parties.index')" :active="request()->routeIs('parties.*')">
                 {{ __('Parties') }}
             </x-responsive-nav-link>
         </div>
