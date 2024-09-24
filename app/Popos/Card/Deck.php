@@ -33,7 +33,7 @@ class Deck
             $this->shuffle();
         }
 
-        $idx = array_rand($this->deck);
+        $idx = (int) array_rand($this->deck);
         [$card] = array_splice($this->deck, $idx, 1);
 
         array_push($this->discard, $card);

@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @mixin IdeHelperParty
+ */
 class Party extends Model
 {
+    /** @use \Illuminate\Database\Eloquent\Factories\HasFactory<\Database\Factories\PartyFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -26,16 +30,25 @@ class Party extends Model
         return $this->characters()->count();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\User, \App\Models\Party>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\Character>
+     */
     public function characters(): BelongsToMany
     {
         return $this->belongsToMany(Character::class, 'party_members');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\PartyMember>
+     */
     public function partyMembers(): HasMany
     {
         return $this->hasMany(PartyMember::class);

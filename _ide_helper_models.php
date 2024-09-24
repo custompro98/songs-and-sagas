@@ -38,6 +38,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Party> $parties
  * @property-read int|null $parties_count
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\CharacterFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Character newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Character newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Character query()
@@ -56,8 +57,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Character whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Character whereVanori($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Character whereWil($value)
+ * @mixin \Eloquent
  */
-	class Character extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperCharacter {}
 }
 
 namespace App\Models{
@@ -70,6 +73,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Character $character
+ * @method static \Database\Factories\CharacterNoteFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|CharacterNote newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CharacterNote newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CharacterNote query()
@@ -78,8 +82,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CharacterNote whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CharacterNote whereNote($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CharacterNote whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class CharacterNote extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperCharacterNote {}
 }
 
 namespace App\Models{
@@ -93,6 +99,7 @@ namespace App\Models{
  * @property-read \App\Models\Character $character
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\InventoryItem> $inventoryItems
  * @property-read int|null $inventory_items_count
+ * @method static \Database\Factories\InventoryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Inventory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Inventory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Inventory query()
@@ -100,8 +107,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Inventory whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Inventory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Inventory whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class Inventory extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperInventory {}
 }
 
 namespace App\Models{
@@ -117,6 +126,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Inventory $inventory
  * @property-read \App\Models\Character|null $character
+ * @method static \Database\Factories\InventoryItemFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|InventoryItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|InventoryItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|InventoryItem query()
@@ -127,8 +137,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|InventoryItem whereNote($value)
  * @method static \Illuminate\Database\Eloquent\Builder|InventoryItem whereQuantity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|InventoryItem whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class InventoryItem extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperInventoryItem {}
 }
 
 namespace App\Models{
@@ -148,6 +160,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PartyMember> $partyMembers
  * @property-read int|null $party_members_count
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\PartyFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Party newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Party newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Party query()
@@ -158,8 +171,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Party whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Party whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Party whereUserId($value)
+ * @mixin \Eloquent
  */
-	class Party extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperParty {}
 }
 
 namespace App\Models{
@@ -173,6 +188,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Character $character
  * @property-read \App\Models\Party $party
+ * @method static \Database\Factories\PartyMemberFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|PartyMember newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PartyMember newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PartyMember query()
@@ -181,8 +197,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PartyMember whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PartyMember wherePartyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PartyMember whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class PartyMember extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperPartyMember {}
 }
 
 namespace App\Models{
@@ -215,7 +233,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class User extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperUser {}
 }
 

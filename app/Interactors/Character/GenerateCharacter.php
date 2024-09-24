@@ -15,7 +15,7 @@ class GenerateCharacter
         $this->context = $context;
     }
 
-    public function call()
+    public function call(): Character
     {
         $vanori = $this->context->faker->randomElement([
             'Bear',
