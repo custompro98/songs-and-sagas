@@ -1,8 +1,8 @@
 includes:
     - vendor/larastan/larastan/extension.neon
+    - ./vendor/tomasvotruba/bladestan/config/extension.neon
 
 parameters:
-
     paths:
         - app/
 
@@ -16,3 +16,7 @@ parameters:
 #        - ./*/*/FileToBeExcluded.php
 #
 #    checkMissingIterableValueType: false
+
+    bladestan:
+        template_paths:
+            - resources/views
