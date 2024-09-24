@@ -91,9 +91,14 @@ class CharacterController extends Controller
         $generator = new GenerateCharacter($context);
         $model = $generator->call();
         $character = $current_user->characters()->save($model);
-        $this->createInventory($character);
 
-        return redirect(route('characters.show', $character->id));
+        if ($character) {
+            $this->createInventory($character);
+
+            return redirect(route('characters.show', $character->id));
+        }
+
+        return redirect(route('characters.index'));
     }
 
     public function update(Request $request, Character $character): RedirectResponse
