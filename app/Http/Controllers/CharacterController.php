@@ -11,12 +11,14 @@ use App\Popos\Character\Armor;
 use App\Popos\Character\Pronouns;
 use App\Popos\Character\Vanori;
 use Faker;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CharacterController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $current_user = Auth::user();
 
@@ -26,12 +28,12 @@ class CharacterController extends Controller
         return view('characters.index', ['characters' => $characters]);
     }
 
-    public function show(Character $character)
+    public function show(Character $character): View
     {
         return view('characters.show', ['character' => $character]);
     }
 
-    public function create()
+    public function create(): View
     {
         $armor_options = Armor::cases();
         $pronoun_options = Pronouns::cases();
@@ -44,7 +46,7 @@ class CharacterController extends Controller
         ]);
     }
 
-    public function store(StoreCharacterRequest $request)
+    public function store(StoreCharacterRequest $request): RedirectResponse
     {
         $armor = 4;
 
@@ -81,7 +83,7 @@ class CharacterController extends Controller
 
     }
 
-    public function generate()
+    public function generate(): RedirectResponse
     {
         $current_user = Auth::user();
 
@@ -94,7 +96,7 @@ class CharacterController extends Controller
         return redirect(route('characters.show', $character->id));
     }
 
-    public function update(Request $request, Character $character)
+    public function update(Request $request, Character $character): RedirectResponse
     {
         $updates = $request->all();
         $updates['experience'] = 0;
@@ -112,14 +114,14 @@ class CharacterController extends Controller
         return redirect(route('characters.show', $character->id));
     }
 
-    public function destroy(Character $character)
+    public function destroy(Character $character): RedirectResponse
     {
         $character->delete();
 
         return redirect(route('characters.index'));
     }
 
-    private function createInventory(Character $character)
+    private function createInventory(Character $character): void
     {
 
         $inventory = $character->inventory()->createQuietly();

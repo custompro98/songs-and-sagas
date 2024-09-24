@@ -6,13 +6,16 @@ use App\Http\Requests\StorePartyRequest;
 use App\Models\Party;
 use App\Models\PartyMember;
 use Faker;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class PartyController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $current_user = Auth::user();
         $parties = $this->parties($current_user->id)->get();
@@ -20,7 +23,7 @@ class PartyController extends Controller
         return view('parties.index', ['parties' => $parties]);
     }
 
-    public function show(Party $party)
+    public function show(Party $party): View
     {
         $current_user = Auth::user();
 
@@ -41,14 +44,14 @@ class PartyController extends Controller
         );
     }
 
-    public function create()
+    public function create(): View
     {
         $current_user = Auth::user();
 
         return view('parties.create', ['current_user' => $current_user]);
     }
 
-    public function store(StorePartyRequest $request)
+    public function store(StorePartyRequest $request): RedirectResponse
     {
         $current_user = Auth::user();
         $party = $current_user->parties()->create([
@@ -60,7 +63,7 @@ class PartyController extends Controller
         return redirect()->route('parties.show', $party->id);
     }
 
-    public function generate()
+    public function generate(): RedirectResponse
     {
         $current_user = Auth::user();
         $faker = Faker\Factory::create();
@@ -87,7 +90,7 @@ class PartyController extends Controller
      * )
      * GROUP BY p.id
      */
-    private function parties(int $user_id)
+    private function parties(int $user_id): Builder
     {
         return DB::table('parties')
             ->selectRaw('parties.*, count(characters.id) as size')
