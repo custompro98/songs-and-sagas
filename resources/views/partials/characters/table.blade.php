@@ -39,7 +39,7 @@
                         @csrf
 
                         <button>
-                            <x-icon-plus class="size-6 inline" />
+                            <span>Generate</span>
                         </button>
                     </form>
                 </td>

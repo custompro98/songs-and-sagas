@@ -51,7 +51,7 @@
         </div>
     @endforeach
     <div class="pt-4 text-center">
-        <form action="{{ route('parties.generate') }}" method="POST">
+        <form action="{{ route('characters.generate') }}" method="POST">
             @csrf
 
             <button
