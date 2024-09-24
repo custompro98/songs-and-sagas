@@ -18,4 +18,9 @@ class Card
     {
         return $this->suit;
     }
+
+    public function value(): Rank
+    {
+        return $this->value;
+    }
 }

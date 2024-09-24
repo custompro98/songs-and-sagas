@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
 
     // Characters
     Route::post('/characters/generate', [CharacterController::class, 'generate'])->name('characters.generate');
-    Route::resource('characters', CharacterController::class)->except(['create', 'store', 'edit']);
+    Route::resource('characters', CharacterController::class)->except(['edit']);
 
     // Character Notes
     Route::resource('characters.notes', CharacterNoteController::class)->only(['store', 'update', 'destroy'])->shallow();
@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
 
     // Parties
     Route::post('/parties/generate', [PartyController::class, 'generate'])->name('parties.generate');
-    Route::resource('parties', PartyController::class)->only(['index', 'create', 'store', 'show']);
+    Route::resource('parties', PartyController::class)->except(['edit', 'update', 'destroy']);
 
     // Party Members
     Route::resource('party_members', PartyMemberController::class)->only(['store']);
