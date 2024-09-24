@@ -65,7 +65,7 @@ class GenerateCharacter
                 break;
         }
 
-        return Character::make([
+        return new Character([
             'name' => $this->context->faker->name(),
             'pronouns' => $this->context->faker->randomElement(['he/him', 'she/her', 'they/them']),
             'vanori' => $vanori,
