@@ -33,8 +33,19 @@ class StoreCharacterRequest extends FormRequest
             'dex' => 'required|integer|min:-1|max:4',
             'wil' => 'required|integer|min:-1|max:4',
             'hrt' => 'required|integer|min:-1|max:4',
-            'resilience' => 'required|integer|min:4|max:15',
+            'resilience_current' => 'required|integer|min:4|max:15',
+            'resilience_max' => 'required|integer|min:4|max:15',
+            'experience' => 'required|integer|min:0|max:8',
             'armor' => ['required', Rule::enum(Armor::class)],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'resilience_current' => $this['resilience'],
+            'resilience_max' => $this['resilience'],
+            'experience' => 0,
+        ]);
     }
 }

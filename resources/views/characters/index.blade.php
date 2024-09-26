@@ -9,13 +9,13 @@
                 </a>
             </button>
         </div>
-        <div class="md:flex justify-center hidden">
+        <div class="lg:flex justify-center hidden">
             @include('partials.characters.table', [
                 'characters' => $characters,
                 'includeCreate' => true,
             ])
         </div>
-        <div class="md:hidden">
+        <div class="lg:hidden">
             @include('partials.characters.list', ['characters' => $characters])
         </div>
     </div>

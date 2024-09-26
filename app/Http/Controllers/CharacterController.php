@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contexts\Character\GenerateCharacterContext;
 use App\Http\Requests\StoreCharacterRequest;
+use App\Http\Requests\UpdateCharacterRequest;
 use App\Interactors\Character\GenerateCharacter;
 use App\Models\Character;
 use App\Popos\Card\Deck;
@@ -13,7 +14,6 @@ use App\Popos\Character\Vanori;
 use Faker;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CharacterController extends Controller
@@ -30,7 +30,9 @@ class CharacterController extends Controller
 
     public function show(Character $character): View
     {
-        return view('characters.show', ['character' => $character]);
+        $armor_options = Armor::cases();
+
+        return view('characters.show', ['character' => $character, 'armor_options' => $armor_options]);
     }
 
     public function create(): View
@@ -48,34 +50,9 @@ class CharacterController extends Controller
 
     public function store(StoreCharacterRequest $request): RedirectResponse
     {
-        $armor = 4;
-
-        switch ($request->input('armor')) {
-            case 'd0':
-                $armor = 0;
-                break;
-            case 'd4':
-                $armor = 4;
-                break;
-            case 'd6':
-                $armor = 6;
-                break;
-        }
 
         $current_user = Auth::user();
-        $character = $current_user->characters()->create([
-            'name' => $request->input('name'),
-            'pronouns' => $request->input('pronouns'),
-            'vanori' => $request->input('vanori'),
-            'str' => $request->input('str'),
-            'dex' => $request->input('dex'),
-            'wil' => $request->input('wil'),
-            'hrt' => $request->input('hrt'),
-            'resilience_current' => $request->input('resilience'),
-            'resilience_max' => $request->input('resilience'),
-            'experience' => 0,
-            'armor' => $armor,
-        ]);
+        $character = $current_user->characters()->create($request->validated());
 
         $this->createInventory($character);
 
@@ -101,20 +78,9 @@ class CharacterController extends Controller
         return redirect(route('characters.index'));
     }
 
-    public function update(Request $request, Character $character): RedirectResponse
+    public function update(UpdateCharacterRequest $request, Character $character): RedirectResponse
     {
-        $updates = $request->all();
-        $updates['experience'] = 0;
-
-        for ($i = 0; $i < 8; $i++) {
-            if (isset($updates['experience-'.$i]) && $updates['experience-'.$i] === 'on') {
-                $updates['experience'] += 1;
-            } else {
-                break;
-            }
-        }
-
-        $character->update($updates);
+        $character->update($request->validated());
 
         return redirect(route('characters.show', $character->id));
     }

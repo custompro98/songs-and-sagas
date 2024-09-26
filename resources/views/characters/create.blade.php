@@ -124,8 +124,8 @@
                 <select name="armor" id="armor">
                     <option value="">-</option>
                     @foreach ($armor_options as $armor)
-                        <option value="{{ $armor }}" {{ old('armor') == $armor->value ? 'selected' : '' }}>
-                            {{ $armor }}
+                        <option value="{{ $armor->value }}" {{ old('armor') == $armor->value ? 'selected' : '' }}>
+                            {{ $armor->name }}
                         </option>
                     @endforeach
                 </select>

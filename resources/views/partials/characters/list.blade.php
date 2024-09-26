@@ -33,7 +33,7 @@
                 </div>
                 <div>
                     <dt class="text-sm text-gray-500">Armor</dt>
-                    <dd class="text-sm">{{ $character->armor }}</dd>
+                    <dd class="text-sm">d{{ $character->armor }}</dd>
                 </div>
                 <div>
                     <dt class="text-sm text-gray-500">Current Resilience</dt>

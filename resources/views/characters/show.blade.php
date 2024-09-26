@@ -41,11 +41,16 @@
                                 <span>{{ $character->resilience_max }}</span>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-1 w-20">
                             <label for="armor" class="text-sm text-gray-500">Armor</label>
-                            <input type="number" id="armor" name="armor" value="{{ $character->armor }}"
-                                class="border border-black h-6 w-10 text-center p-1"
-                                x-on:input.change.debounce="$el.closest('form').submit()" />
+                            <select name="armor" id="armor" x-on:change.debounce="$el.closest('form').submit()">
+                                @foreach ($armor_options as $armor)
+                                    <option value="{{ $armor->value }}"
+                                        {{ $character->armor == $armor->value ? 'selected' : '' }}>
+                                        {{ $armor->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="flex flex-col gap-1">
                             <span class="text-sm text-gray-500">Experience</span>

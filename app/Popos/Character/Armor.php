@@ -2,9 +2,9 @@
 
 namespace App\Popos\Character;
 
-enum Armor: string
+enum Armor: int
 {
-    case d0 = 'd0';
-    case d4 = 'd4';
-    case d6 = 'd6';
+    case d0 = 0;
+    case d4 = 4;
+    case d6 = 6;
 }
