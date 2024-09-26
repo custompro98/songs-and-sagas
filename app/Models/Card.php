@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Popos\Card\Suit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -59,5 +60,19 @@ class Card extends Model
                 'discarded_at' => now(),
                 'character_id' => null,
             ]);
+    }
+
+    public function suit(): string
+    {
+        switch ($this->suit) {
+            case Suit::HEARTS:
+                return '♥';
+            case Suit::DIAMONDS:
+                return '♦';
+            case Suit::CLUBS:
+                return '♣';
+            case Suit::SPADES:
+                return '♠';
+        }
     }
 }

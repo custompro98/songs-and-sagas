@@ -17,5 +17,10 @@ export default {
         },
     },
 
+    safelist: [
+        ...[...Array(10).keys()].flatMap((i) => [`translate-x-[${6 * i}rem]`]),
+        ...[...Array(10).keys()].flatMap((i) => [`z-[-${i}]`]),
+    ],
+
     plugins: [forms],
 };
