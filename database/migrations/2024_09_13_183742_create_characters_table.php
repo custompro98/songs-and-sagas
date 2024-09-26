@@ -41,6 +41,8 @@ return new class extends Migration
             $table->string('note');
 
             $table->timestamps();
+
+            $table->index('character_id');
         });
 
         Schema::create('inventories', function (Blueprint $table) {
@@ -48,6 +50,8 @@ return new class extends Migration
             $table->foreignId('character_id')->references('id')->on('characters')->onDelete('cascade');
 
             $table->timestamps();
+
+            $table->index('character_id');
         });
 
         Schema::create('inventory_items', function (Blueprint $table) {
@@ -58,6 +62,8 @@ return new class extends Migration
             $table->integer('quantity')->default(0);
 
             $table->timestamps();
+
+            $table->index('inventory_id');
         });
     }
 

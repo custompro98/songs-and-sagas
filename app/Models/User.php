@@ -67,4 +67,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Party::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Deck>
+     */
+    public function decks(): HasMany
+    {
+        return $this->hasMany(Deck::class);
+    }
 }

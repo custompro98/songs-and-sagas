@@ -72,4 +72,12 @@ class Character extends Model
     {
         return $this->belongsToMany(Party::class, 'party_members');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Card>
+     */
+    public function hand(): HasMany
+    {
+        return $this->hasMany(Card::class);
+    }
 }

@@ -14,6 +14,7 @@
         "fakerphp/faker": "^1.23",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
+        "mauricius/laravel-htmx": "^0.6.0",
         "staudenmeir/belongs-to-through": "^2.5"
     },
     "require-dev": {

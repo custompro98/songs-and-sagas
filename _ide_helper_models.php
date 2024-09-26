@@ -16,6 +16,38 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property int $deck_id
+ * @property string $suit
+ * @property string $rank
+ * @property string|null $discarded_at
+ * @property int|null $character_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Character|null $character
+ * @property-read \App\Models\Deck $deck
+ * @method static \Database\Factories\CardFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Card newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Card newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Card query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Card whereCharacterId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Card whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Card whereDeckId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Card whereDiscardedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Card whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Card whereRank($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Card whereSuit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Card whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperCard {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property int $user_id
  * @property string $name
  * @property string $pronouns
@@ -30,6 +62,8 @@ namespace App\Models{
  * @property int $armor
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Card> $hand
+ * @property-read int|null $hand_count
  * @property-read \App\Models\Inventory|null $inventory
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\InventoryItem> $inventoryItems
  * @property-read int|null $inventory_items_count
@@ -86,6 +120,41 @@ namespace App\Models{
  */
 	#[\AllowDynamicProperties]
 	class IdeHelperCharacterNote {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $name
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Card> $cards
+ * @property-read int|null $cards_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Card> $discardPile
+ * @property-read int|null $discard_pile_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Card> $drawPile
+ * @property-read int|null $draw_pile_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Card> $handPile
+ * @property-read int|null $hand_pile_count
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\DeckFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Deck newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Deck newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Deck query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Deck whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Deck whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Deck whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Deck whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Deck whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Deck whereUserId($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperDeck {}
 }
 
 namespace App\Models{
@@ -217,6 +286,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Character> $characters
  * @property-read int|null $characters_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Deck> $decks
+ * @property-read int|null $decks_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Party> $parties

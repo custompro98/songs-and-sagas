@@ -11,31 +11,34 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('parties', function (Blueprint $table) {
+        Schema::create('decks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->string('name');
             $table->string('description')->nullable();
 
-            $table->string('join_code')->unique();
-
             $table->timestamps();
 
             $table->index('user_id');
+            $table->unique(['user_id', 'name']);
         });
 
-        Schema::create('party_members', function (Blueprint $table) {
+        Schema::create('cards', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('deck_id')->references('id')->on('decks')->onDelete('cascade');
 
-            $table->foreignId('party_id')->references('id')->on('parties')->onDelete('cascade');
-            $table->foreignId('character_id')->references('id')->on('characters')->onDelete('cascade');
+            $table->string('suit');
+            $table->string('rank');
+
+            $table->timestamp('discarded_at')->nullable();
+            $table->foreignId('character_id')->nullable()->references('id')->on('characters')->onDelete('set null');
 
             $table->timestamps();
 
-            $table->unique(['party_id', 'character_id']);
-            $table->index('party_id');
+            $table->index('deck_id');
             $table->index('character_id');
+            $table->unique(['deck_id', 'suit', 'rank']);
         });
     }
 
@@ -44,7 +47,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('party_members');
-        Schema::dropIfExists('parties');
+        Schema::dropIfExists('cards');
+        Schema::dropIfExists('decks');
     }
 };

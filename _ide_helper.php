@@ -18158,6 +18158,18 @@ namespace Illuminate\Support\Facades {
                         /** @var \Illuminate\View\Factory $instance */
                         return $instance->renderTranslation();
         }
+                    /**
+         * 
+         *
+         * @see \Mauricius\LaravelHtmx\LaravelHtmxServiceProvider::boot()
+         * @param mixed $view
+         * @param mixed $fragment
+         * @param array $data
+         * @static 
+         */        public static function renderFragment($view, $fragment, $data = [])
+        {
+                        return \Illuminate\View\Factory::renderFragment($view, $fragment, $data);
+        }
             }
             /**
      * 
@@ -18527,6 +18539,26 @@ namespace Illuminate\Http {
          */        public static function hasValidRelativeSignatureWhileIgnoring($ignoreQuery = [])
         {
                         return \Illuminate\Http\Request::hasValidRelativeSignatureWhileIgnoring($ignoreQuery);
+        }
+            }
+    }
+
+namespace Illuminate\View {
+            /**
+     * 
+     *
+     */        class Factory {
+                    /**
+         * 
+         *
+         * @see \Mauricius\LaravelHtmx\LaravelHtmxServiceProvider::boot()
+         * @param mixed $view
+         * @param mixed $fragment
+         * @param array $data
+         * @static 
+         */        public static function renderFragment($view, $fragment, $data = [])
+        {
+                        return \Illuminate\View\Factory::renderFragment($view, $fragment, $data);
         }
             }
     }

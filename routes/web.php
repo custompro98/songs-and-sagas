@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\CharacterNoteController;
+use App\Http\Controllers\DeckController;
 use App\Http\Controllers\InventoryItemController;
 use App\Http\Controllers\PartyController;
 use App\Http\Controllers\PartyMemberController;
@@ -41,6 +42,14 @@ Route::middleware('auth')->group(function () {
 
     // Party Members
     Route::resource('party_members', PartyMemberController::class)->only(['store']);
+
+    /*
+     * Tools Routes
+     */
+
+    // Decks
+    Route::post('/decks/{id}/draw', [DeckController::class, 'draw'])->name('decks.draw');
+    Route::resource('decks', DeckController::class)->only(['index', 'show', 'create', 'store']);
 });
 
 require __DIR__.'/auth.php';
