@@ -43,9 +43,10 @@
                 @fragment('fragments.decks.show.discard_pile')
                     <div class="pt-2" id="discard-pile">
                         <h3 class="text-xl font-medium">Discard pile</h3>
-                        <div class="grid grid-cols-1 pt-2 isolate">
+                        <div
+                            class="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:gap-0 lg:grid-cols-1 pt-2 isolate">
                             @foreach ($deck->discardPile()->limit(9)->get() as $card)
-                                <div class="flex flex-col gap-1 border-2 border-gray-300 bg-white shadow p-2 rounded-lg justify-center items-center aspect-[63/88] max-w-40 col-start-1 row-start-1 translate-x-[{{ 6 * $loop->index }}rem] z-[-{{ $loop->index }}] hover:z-[100] hover:translate-y-[-1rem] translate-x-[{{ 6 * $loop->index }}rem] transition-all ease-in-ease-out duration-300"
+                                <div class="flex flex-col gap-1 border-2 border-gray-300 bg-white shadow p-2 rounded-lg justify-center items-center aspect-[63/88] max-w-40 lg:col-start-1 lg:row-start-1 lg:translate-x-[{{ 6 * $loop->index }}rem] lg:z-[-{{ $loop->index }}] lg:hover:z-[100] lg:hover:translate-y-[-1rem] lg:translate-x-[{{ 6 * $loop->index }}rem] lg:transition-all lg:ease-in-ease-out lg:duration-300"
                                     <span>{{ $card->rank }}</span>
                                     <span>of</span>
                                     <span>{{ $card->suit }}</span>

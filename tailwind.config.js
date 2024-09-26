@@ -18,8 +18,10 @@ export default {
     },
 
     safelist: [
-        ...[...Array(10).keys()].flatMap((i) => [`translate-x-[${6 * i}rem]`]),
-        ...[...Array(10).keys()].flatMap((i) => [`z-[-${i}]`]),
+        ...[...Array(10).keys()].flatMap((i) => [
+            `lg:translate-x-[${6 * i}rem]`,
+        ]),
+        ...[...Array(10).keys()].flatMap((i) => [`lg:z-[-${i}]`]),
     ],
 
     plugins: [forms],
