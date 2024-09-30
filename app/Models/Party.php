@@ -55,11 +55,11 @@ class Party extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Table, \App\Models\Party>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\TableParty>
      */
     public function tableParty()
     {
-        return $this->belongsTo(Table::class);
+        return $this->hasMany(TableParty::class);
     }
 
     /**

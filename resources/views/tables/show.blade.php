@@ -14,17 +14,32 @@
                     <div class="flex flex-col gap-1">
                         <span class="text-sm text-gray-500">Party</span>
                         @if ($party)
-                            <span>{{ $party->name }}</span>
+                            <div class="flex flex-row gap-1">
+                                <span>{{ $party->name }}</span>
+                                <form action="{{ route('table_parties.destroy', $tableParty->id) }}" method="POST"
+                                    class="flex flex-row items-center">
+                                    @csrf
+                                    @method('delete')
+
+                                    <button>
+                                        <x-icon-x-mark class="size-5 text-red-700" />
+                                    </button>
+                                </form>
+                            </div>
                         @else
-                            <span>No heroes <em>yet</em>.</span>
+                            <form action="{{ route('table_parties.store') }}" method="POST"
+                                class="flex flex-row gap-2">
+                                @csrf
+
+                                <input type="hidden" name="table_id" value="{{ $table->id }}">
+                                <input type="text" name="join_code" placeholder="QvD0Hx4GWc9CR4f3" />
+                                <input type="submit" value="Invite" class="p-2 cursor-pointer" />
+                            </form>
                         @endif
                     </div>
                     <div class="flex flex-col gap-1">
-                        <span class="text-sm text-gray-500">Join code</span>
-                        <div class="flex flex-row gap-1 items-center">
-                            <x-button-copy showText="{{ $table->join_code }}" copyText="{{ $table->join_code }}"
-                                class="size-5 inline text-gray-500 hover:text-gray-600 active:text-gray-900" />
-                        </div>
+                        <span class="text-sm text-gray-500">Description</span>
+                        <span>{{ $table->description }}</span>
                     </div>
             </section>
             <section>
@@ -41,32 +56,31 @@
             </section>
             <section>
                 <h2 class="text-2xl font-medium">Deck</h2>
-                @if ($deck)
-                    <a href="{{ route('decks.show', $deck->id) }}" class="underline text-blue-500">
-                        {{ $deck->name }}
-                    </a>
-                @else
-                    <form action="{{ route('table_decks.store') }}" method="POST" class="flex flex-col gap-2">
-                        @csrf
+                <div class="pt-2">
+                    @if ($deck)
+                        <a href="{{ route('decks.show', $deck->id) }}" class="underline text-blue-500">
+                            {{ $deck->name }}
+                        </a>
+                    @else
+                        <form action="{{ route('table_decks.store') }}" method="POST" class="flex flex-row gap-2">
+                            @csrf
 
-                        <input type="hidden" name="table_id" value="{{ $table->id }}">
-                        <select name="deck_id" id="deck_id">
-                            <option value="">-</option>
-                            @foreach ($decks as $deck)
-                                <option value="{{ $deck->id }}">
-                                    {{ $deck->name }}
-                                </option>
-                            @endforeach
-                        </select>
+                            <input type="hidden" name="table_id" value="{{ $table->id }}">
+                            <select name="deck_id" id="deck_id" class="max-w-fit">
+                                <option value="">-</option>
+                                @foreach ($decks as $deck)
+                                    <option value="{{ $deck->id }}">
+                                        {{ $deck->name }}
+                                    </option>
+                                @endforeach
+                            </select>
 
-                        <button
-                            class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 max-w-fit">
-                            <span>Set</span>
-                        </button>
-                    </form>
-                @endif
+                            <input type="submit" value="Set" class="p-2 cursor-pointer" />
+                        </form>
+                    @endif
+                </div>
 
-                <div class="flex flex-row gap-2 pt-2">
+                <div class="flex flex-row gap-2 pt-4">
                     <form hx-post="{{ route('decks.draw', $deck) }}" hx-swap="outerHTML" hx-target="#discard-pile">
                         @csrf
 

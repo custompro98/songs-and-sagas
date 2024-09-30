@@ -56,7 +56,7 @@
                         <input type="hidden" name="party_id" value="{{ $party->id }}" />
                         <input type="text" name="join_code" placeholder="QvD0Hx4GWc9CR4f3"
                             class="border border-black h-6 w-48 p-1" />
-                        <input type="submit" value="Join" class="p-2" />
+                        <input type="submit" value="Join" class="p-2 cursor-pointer" />
                     </form>
                 </div>
             </section>

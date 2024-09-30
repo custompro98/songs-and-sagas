@@ -229,6 +229,9 @@ namespace App\Models{
  * @property-read int $size
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PartyMember> $partyMembers
  * @property-read int|null $party_members_count
+ * @property-read \App\Models\Table|null $tableParty
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Table> $tables
+ * @property-read int|null $tables_count
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\PartyFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Party newModelQuery()
@@ -280,11 +283,13 @@ namespace App\Models{
  * @property int $id
  * @property int $user_id
  * @property string $name
- * @property string $join_code
+ * @property string|null $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Deck|null $deck
- * @property-read \App\Models\Party|null $party
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Party> $party
+ * @property-read int|null $party_count
+ * @property-read \App\Models\TableDeck|null $tableDeck
  * @property-read \App\Models\TableParty|null $tableParty
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\TableFactory factory($count = null, $state = [])
@@ -292,8 +297,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Table newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Table query()
  * @method static \Illuminate\Database\Eloquent\Builder|Table whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Table whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Table whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Table whereJoinCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Table whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Table whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Table whereUserId($value)

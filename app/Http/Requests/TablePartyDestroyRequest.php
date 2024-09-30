@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TablePartyStoreRequest extends FormRequest
+class TablePartyDestroyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class TablePartyStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'join_code' => 'required|string|max:255',
             'table_id' => 'required|integer|exists:tables,id',
+            'party_id' => 'required|integer|exists:parties,id',
         ];
     }
 }

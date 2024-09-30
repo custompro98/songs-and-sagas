@@ -7,7 +7,6 @@ use Auth;
 use Faker;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Str;
 
 class TableController extends Controller
 {
@@ -24,6 +23,7 @@ class TableController extends Controller
         $current_user = Auth::user();
 
         $party = $table->party()->first();
+        $tableParty = is_null($party) ? null : $party->tableParty()->first();
         $characters = is_null($party) ? [] : $party->characters()->get();
         $deck = $table->deck()->first();
         $decks = $current_user->decks()->get();
@@ -31,6 +31,7 @@ class TableController extends Controller
         return view('tables.show', [
             'table' => $table,
             'party' => $party,
+            'tableParty' => $tableParty,
             'characters' => $characters,
             'decks' => $decks,
             'deck' => $deck,
@@ -44,7 +45,6 @@ class TableController extends Controller
 
         $table = $current_user->tables()->create([
             'name' => $faker->name().'\'s Table',
-            'join_code' => Str::random(),
         ]);
 
         return redirect(route('tables.show', $table->id));

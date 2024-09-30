@@ -8,10 +8,9 @@
             </h2>
             <dl class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div>
-                    <dt class="text-sm text-gray-500">Join code</dt>
+                    <dt class="text-sm text-gray-500">Description</dt>
                     <dd class="text-sm">
-                        <x-button-copy showText="{{ $table->join_code }}" copyText="{{ $table->join_code }}"
-                            class="size-5 inline text-gray-500 hover:text-gray-600 active:text-gray-900" />
+                        <p>{{ $table->description }}</p>
                     </dd>
                 </div>
             </dl>

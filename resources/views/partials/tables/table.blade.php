@@ -3,7 +3,7 @@
         <tr>
             <th class="p-2 border-2 border-black">Name</th>
             <th class="p-2 border-2 border-black">Party</th>
-            <th class="p-2 border-2 border-black">Join code</th>
+            <th class="p-2 border-2 border-black">Description</th>
         </tr>
     </thead>
     <tbody>
@@ -21,9 +21,8 @@
                         <span>No heroes <em>yet</em>.</span>
                     </td>
                 @endif
-                <td class="p-2 border-2 border-black">
-                    <x-button-copy showText="{{ $table->join_code }}" copyText="{{ $table->join_code }}"
-                        class="size-5 inline text-gray-500 hover:text-gray-600 active:text-gray-900" />
+                <td class="p-2 border-2 border-black whitespace-nowrap overflow-hidden overflow-ellipsis max-w-80">
+                    <span>{{ $table->description }}</span>
                 </td>
             </tr>
         @endforeach

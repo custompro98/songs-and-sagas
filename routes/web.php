@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('tables', TableController::class);
 
     // Table Parties
-    Route::resource('table_parties', TablePartyController::class)->only(['store']);
+    Route::resource('table_parties', TablePartyController::class)->only(['store', 'destroy']);
 
     // Table Decks
     Route::resource('table_decks', TableDeckController::class)->only(['store']);
