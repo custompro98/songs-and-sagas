@@ -140,6 +140,7 @@ namespace App\Models{
  * @property-read int|null $draw_pile_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Card> $handPile
  * @property-read int|null $hand_pile_count
+ * @property-read \App\Models\Table|null $table
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\DeckFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Deck newModelQuery()
@@ -277,6 +278,86 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property int $user_id
+ * @property string $name
+ * @property string $join_code
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Deck|null $deck
+ * @property-read \App\Models\Party|null $party
+ * @property-read \App\Models\TableParty|null $tableParty
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\TableFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Table newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Table whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Table whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Table whereJoinCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Table whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Table whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Table whereUserId($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperTable {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $table_id
+ * @property int $deck_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Deck $deck
+ * @property-read \App\Models\Table $table
+ * @method static \Illuminate\Database\Eloquent\Builder|TableDeck newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TableDeck newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TableDeck query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TableDeck whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableDeck whereDeckId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableDeck whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableDeck whereTableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableDeck whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperTableDeck {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $table_id
+ * @property int $party_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Party $party
+ * @property-read \App\Models\Table $table
+ * @method static \Illuminate\Database\Eloquent\Builder|TableParty newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TableParty newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TableParty query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TableParty whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableParty whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableParty wherePartyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableParty whereTableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableParty whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperTableParty {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property string $name
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
@@ -292,6 +373,8 @@ namespace App\Models{
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Party> $parties
  * @property-read int|null $parties_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Table> $tables
+ * @property-read int|null $tables_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()

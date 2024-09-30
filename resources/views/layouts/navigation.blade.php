@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('parties.index')" :active="request()->routeIs('parties.*')">
                         {{ __('Parties') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('tables.index')" :active="request()->routeIs('tables.*')">
+                        {{ __('Tables') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('decks.index')" :active="request()->routeIs('decks.*')">
                         {{ __('Decks') }}
                     </x-nav-link>
@@ -86,6 +89,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('parties.index')" :active="request()->routeIs('parties.*')">
                 {{ __('Parties') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('tables.index')" :active="request()->routeIs('tables.*')">
+                {{ __('Tables') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('decks.index')" :active="request()->routeIs('decks.*')">
                 {{ __('Decks') }}

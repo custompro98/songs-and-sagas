@@ -43,7 +43,7 @@ class Party extends Model
      */
     public function characters(): BelongsToMany
     {
-        return $this->belongsToMany(Character::class, 'party_members');
+        return $this->belongsToMany(Character::class, PartyMember::class);
     }
 
     /**
@@ -52,5 +52,21 @@ class Party extends Model
     public function partyMembers(): HasMany
     {
         return $this->hasMany(PartyMember::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Table, \App\Models\Party>
+     */
+    public function tableParty()
+    {
+        return $this->belongsTo(Table::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\Table>
+     */
+    public function tables(): BelongsToMany
+    {
+        return $this->belongsToMany(Table::class, TableParty::class);
     }
 }

@@ -69,14 +69,14 @@ class DeckController extends Controller
     {
         $deck->recall(null);
 
-        return redirect(route('decks.show', $deck->id));
+        return back();
     }
 
     public function shuffle(Deck $deck): string
     {
         $deck->shuffle();
 
-        return redirect(route('decks.show', $deck->id));
+        return back();
     }
 
     private function getCharacters()

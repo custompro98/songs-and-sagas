@@ -8,6 +8,9 @@ use App\Http\Controllers\InventoryItemController;
 use App\Http\Controllers\PartyController;
 use App\Http\Controllers\PartyMemberController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TableController;
+use App\Http\Controllers\TableDeckController;
+use App\Http\Controllers\TablePartyController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'characters');
@@ -57,6 +60,16 @@ Route::middleware('auth')->group(function () {
     // Cards
     Route::patch('/cards/{card}/send', [CardController::class, 'send'])->name('cards.send');
     Route::patch('/cards/{card}/discard', [CardController::class, 'discard'])->name('cards.discard');
+
+    // Tables
+    Route::post('/tables/generate', [TableController::class, 'generate'])->name('tables.generate');
+    Route::resource('tables', TableController::class);
+
+    // Table Parties
+    Route::resource('table_parties', TablePartyController::class)->only(['store']);
+
+    // Table Decks
+    Route::resource('table_decks', TableDeckController::class)->only(['store']);
 });
 
 require __DIR__.'/auth.php';

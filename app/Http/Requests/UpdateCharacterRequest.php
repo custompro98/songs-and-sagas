@@ -25,8 +25,6 @@ class UpdateCharacterRequest extends FormRequest
      */
     public function rules(): array
     {
-        // dd($this->all());
-
         return [
             'name' => 'string|max:255',
             'pronouns' => Rule::enum(Pronouns::class),

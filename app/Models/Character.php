@@ -70,7 +70,7 @@ class Character extends Model
      */
     public function parties(): BelongsToMany
     {
-        return $this->belongsToMany(Party::class, 'party_members');
+        return $this->belongsToMany(Party::class, PartyMember::class);
     }
 
     /**

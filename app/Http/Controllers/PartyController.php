@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePartyRequest;
 use App\Models\Party;
 use App\Models\PartyMember;
+use App\Models\TableParty;
 use Faker;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Query\Builder;
@@ -32,6 +33,19 @@ class PartyController extends Controller
             ->get()
             ->map(function ($partyMember) {
                 return $partyMember->character;
+            })
+            ->filter(function ($character) {
+                return ! is_null($character);
+            });
+
+        $tables = TableParty::where('party_id', $party->id)
+            ->with('table')
+            ->get()
+            ->map(function ($tableParty) {
+                return $tableParty->table;
+            })
+            ->filter(function ($table) {
+                return ! is_null($table);
             });
 
         return view(
@@ -40,6 +54,7 @@ class PartyController extends Controller
                 'party' => $party,
                 'characters' => $characters,
                 'current_user_id' => $current_user->id,
+                'tables' => $tables,
             ]
         );
     }

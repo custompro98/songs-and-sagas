@@ -10,10 +10,9 @@ class CardController extends Controller
 {
     public function send(CardSendToHandRequest $request, Card $card): RedirectResponse
     {
-        $request->validated();
-        $card->update(['character_id' => $request->character_id, 'discarded_at' => null]);
+        $card->update(['character_id' => $request->validated('character_id'), 'discarded_at' => null]);
 
-        return redirect(route('decks.show', $card->deck->id));
+        return back();
     }
 
     public function discard(Card $card): RedirectResponse

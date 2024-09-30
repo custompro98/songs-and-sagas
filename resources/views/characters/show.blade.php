@@ -194,7 +194,7 @@
                         @csrf
 
                         <input type="hidden" name="characterId" value="{{ $character->id }}" />
-                        <input type="text" name="joinCode" placeholder="dOVuWeFrCUUzNXFh"
+                        <input type="text" name="join_code" placeholder="dOVuWeFrCUUzNXFh"
                             class="border border-black h-6 w-48 p-1" />
                         <input type="submit" value="Join" class="p-2" />
                     </form>

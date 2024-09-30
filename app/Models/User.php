@@ -75,4 +75,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Deck::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Table>
+     */
+    public function tables(): HasMany
+    {
+        return $this->hasMany(Table::class);
+    }
 }
