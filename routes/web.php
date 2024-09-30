@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\CharacterNoteController;
 use App\Http\Controllers\DeckController;
@@ -48,8 +49,14 @@ Route::middleware('auth')->group(function () {
      */
 
     // Decks
-    Route::post('/decks/{id}/draw', [DeckController::class, 'draw'])->name('decks.draw');
+    Route::post('/decks/{deck}/draw', [DeckController::class, 'draw'])->name('decks.draw');
+    Route::post('/decks/{deck}/recall', [DeckController::class, 'recall'])->name('decks.recall');
+    Route::post('/decks/{deck}/shuffle', [DeckController::class, 'shuffle'])->name('decks.shuffle');
     Route::resource('decks', DeckController::class)->only(['index', 'show', 'create', 'store']);
+
+    // Cards
+    Route::patch('/cards/{card}/send', [CardController::class, 'send'])->name('cards.send');
+    Route::patch('/cards/{card}/discard', [CardController::class, 'discard'])->name('cards.discard');
 });
 
 require __DIR__.'/auth.php';

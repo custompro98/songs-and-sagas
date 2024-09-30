@@ -72,6 +72,7 @@ class Deck extends Model
         return $this
             ->hasMany(Card::class)
             ->whereNotNull('discarded_at')
+            ->whereNull('character_id')
             ->orderBy('discarded_at', 'desc');
     }
 
@@ -92,10 +93,27 @@ class Deck extends Model
      */
     public function recall(?int $characterId): int
     {
-        return $this
+        $query = $this
             ->cards()
-            ->where('character_id', $characterId)
-            ->whereNull('discarded_at')
-            ->update(['character_id' => null]);
+            ->whereNull('discarded_at');
+
+        if ($characterId) {
+            $query = $query->where('character_id', $characterId);
+        } else {
+            $query = $query->whereNotNull('character_id');
+        }
+
+        return $query
+            ->update(['character_id' => null, 'discarded_at' => now()]);
+    }
+
+    /**
+     * Shuffles the discard pile into the deck, leaves all hand piles untouched.
+     */
+    public function shuffle(): int
+    {
+        return $this
+            ->discardPile()
+            ->update(['discarded_at' => null]);
     }
 }

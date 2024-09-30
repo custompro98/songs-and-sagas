@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DeckStoreRequest;
+use App\Models\Character;
 use App\Models\Deck;
 use App\Popos\Card\Rank;
 use App\Popos\Card\Suit;
@@ -24,7 +25,7 @@ class DeckController extends Controller
 
     public function show(Deck $deck): View
     {
-        return view('decks.show', ['deck' => $deck]);
+        return view('decks.show', ['deck' => $deck, 'characters' => $this->getCharacters()]);
     }
 
     public function create(): View
@@ -53,16 +54,34 @@ class DeckController extends Controller
         return redirect(route('decks.show', $deck->id));
     }
 
-    public function draw(HtmxRequest $request, string $id): string
+    public function draw(HtmxRequest $request, Deck $deck): string
     {
         if (! $request->isHtmxRequest()) {
             abort(404);
         }
 
-        /** @var \App\Models\Deck $deck */
-        $deck = Deck::findOrFail($id);
         $deck->draw();
 
-        return FacadesView::renderFragment('decks.show', 'fragments.decks.show.discard_pile', ['deck' => $deck]);
+        return FacadesView::renderFragment('decks.show', 'fragments.decks.show.discard_pile', ['deck' => $deck, 'characters' => $this->getCharacters()]);
+    }
+
+    public function recall(Deck $deck): RedirectResponse
+    {
+        $deck->recall(null);
+
+        return redirect(route('decks.show', $deck->id));
+    }
+
+    public function shuffle(Deck $deck): string
+    {
+        $deck->shuffle();
+
+        return redirect(route('decks.show', $deck->id));
+    }
+
+    private function getCharacters()
+    {
+
+        return Character::all();
     }
 }

@@ -201,6 +201,35 @@
                 </div>
             </section>
         </div>
-    </div>
+        <section class="pt-4">
+            <h2 class="text-2xl font-medium">Hand</h2>
+            <div class="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:gap-0 lg:grid-cols-1 pt-2 isolate">
+                @foreach ($character->hand()->get() as $card)
+                    <div class="flex flex-col gap-1 border-2 border-gray-300 bg-white shadow p-2 rounded-lg justify-center items-center aspect-[63/88] max-w-40 lg:col-start-1 lg:row-start-1 lg:translate-x-[{{ 6 * $loop->index }}rem] lg:z-[-{{ $loop->index }}] lg:hover:z-[100] lg:hover:translate-y-[-1rem] lg:translate-x-[{{ 6 * $loop->index }}rem] lg:transition-all lg:ease-in-ease-out lg:duration-300 cursor-pointer"
+                        x-on:click="selectedCard = {{ $card->id }}; $dispatch('open-modal', 'discard-{{ $card->id }}')">
+                        <span>{{ $card->rank }}</span>
+                        <span>of</span>
+                        <span>{{ $card->suit }}</span>
+                    </div>
+                    <x-modal name="discard-{{ $card->id }}" focusable>
+                        <div class="flex flex-col gap-4">
+                            <div class="border-b border-gray-100 bg-white p-4">
+                                <h3 class="text-xl font-medium">Discard?</h3>
+                            </div>
+                            <form method="POST" action="{{ route('cards.discard', $card->id) }}"
+                                class="p-6 flex flex-row gap-4">
+                                @csrf
+                                @method('patch')
+
+                                <button
+                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                    Discard
+                                </button>
+                            </form>
+                        </div>
+                    </x-modal>
+                @endforeach
+            </div>
+        </section>
     </div>
 </x-app-layout>
