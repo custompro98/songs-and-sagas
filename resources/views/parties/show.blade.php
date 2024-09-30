@@ -35,31 +35,6 @@
                     @include('partials.characters.list', ['characters' => $characters])
                 </div>
             </section>
-            <section>
-                <h2 class="text-2xl font-medium">Tables</h2>
-                <div class="pt-2">
-                    <ul>
-                        @if ($party->tables()->count() > 0)
-                            @foreach ($party->tables()->get() as $table)
-                                <li class="flex flex-row gap-1">
-                                    <a href="{{ route('tables.show', $table->id) }}"
-                                        class="underline text-blue-500">{{ $table->name }}</a>
-                                </li>
-                            @endforeach
-                        @else
-                            <li>No obligations...<em>yet</em>.</li>
-                        @endif
-                    </ul>
-                    <form action="{{ route('table_parties.store') }}" method="POST">
-                        @csrf
-
-                        <input type="hidden" name="party_id" value="{{ $party->id }}" />
-                        <input type="text" name="join_code" placeholder="QvD0Hx4GWc9CR4f3"
-                            class="border border-black h-6 w-48 p-1" />
-                        <input type="submit" value="Join" class="p-2 cursor-pointer" />
-                    </form>
-                </div>
-            </section>
         </div>
     </div>
 </x-app-layout>
