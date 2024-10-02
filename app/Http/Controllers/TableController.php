@@ -71,6 +71,13 @@ class TableController extends Controller
         return redirect(route('tables.show', $table->id));
     }
 
+    public function destroy(Table $table): RedirectResponse
+    {
+        $table->delete();
+
+        return redirect(route('tables.index'));
+    }
+
     /*
      * Select tables which belong to the current user, or
      * have a character belonging to the current user.

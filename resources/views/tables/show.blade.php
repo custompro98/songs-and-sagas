@@ -2,6 +2,11 @@
     <div class="mx-auto max-w-screen-lg" x-data="{}">
         <div class="flex flex-row justify-between items-center">
             <h1 class="text-3xl font-bold">{{ $table->name }}</h1>
+            <div class="flex flex-row gap-2">
+                <form action="{{ route('tables.destroy', $table->id) }}">
+                    <x-danger-button>Delete</x-danger-button>
+                </form>
+            </div>
         </div>
         <div class="grid grid-cols-1 gap-4 pt-4">
             <section>
