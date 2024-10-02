@@ -30,6 +30,7 @@ class TableController extends Controller
         $party = $table->party()->first();
         $tableParty = is_null($party) ? null : $party->tableParty()->first();
         $characters = is_null($party) ? [] : $party->characters()->get();
+        $tableDeck = $table->tableDeck()->first();
         $deck = $table->deck()->first();
         $decks = $current_user->decks()->get();
 
@@ -40,6 +41,7 @@ class TableController extends Controller
             'characters' => $characters,
             'decks' => $decks,
             'deck' => $deck,
+            'tableDeck' => $tableDeck,
         ]);
     }
 

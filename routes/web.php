@@ -69,7 +69,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('table_parties', TablePartyController::class)->only(['store', 'destroy']);
 
     // Table Decks
-    Route::resource('table_decks', TableDeckController::class)->only(['store']);
+    Route::resource('table_decks', TableDeckController::class)->only(['store', 'destroy']);
 });
 
 require __DIR__.'/auth.php';

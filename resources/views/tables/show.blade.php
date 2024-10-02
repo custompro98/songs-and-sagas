@@ -58,9 +58,19 @@
                 <h2 class="text-2xl font-medium">Deck</h2>
                 <div class="pt-2">
                     @if ($deck)
-                        <a href="{{ route('decks.show', $deck->id) }}" class="underline text-blue-500">
-                            {{ $deck->name }}
-                        </a>
+                        <div class="flex flex-row gap-1">
+                            <a href="{{ route('decks.show', $deck->id) }}" class="underline text-blue-500">
+                                {{ $deck->name }}
+                            </a>
+                            <form action="{{ route('table_decks.destroy', $tableDeck->id) }}" method="POST"
+                                class="flex flex-row items-center">
+                                @csrf
+                                @method('delete')
+
+                                <button>
+                                    <x-icon-x-mark class="size-5 text-red-700" />
+                                </button>
+                        </div>
 
                         <div class="flex flex-row gap-2 pt-4">
                             <form hx-post="{{ route('decks.draw', $deck) }}" hx-swap="outerHTML"

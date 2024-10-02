@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Znck\Eloquent\Traits\BelongsToThrough as BelongsToThroughTrait;
 
 /**
@@ -41,11 +41,11 @@ class Table extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough<\App\Models\Deck>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\Deck>
      */
-    public function deck(): HasOneThrough
+    public function deck(): BelongsToMany
     {
-        return $this->hasOneThrough(Deck::class, TableDeck::class, 'table_id', 'id');
+        return $this->belongsToMany(Deck::class, TableDeck::class);
     }
 
     /**

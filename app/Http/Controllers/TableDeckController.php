@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TableDeckStoreRequest;
 use App\Models\Table;
+use App\Models\TableDeck;
 use Illuminate\Http\RedirectResponse;
 
 class TableDeckController extends Controller
@@ -21,5 +22,12 @@ class TableDeckController extends Controller
         }
 
         return redirect(route('tables.show', $table->id));
+    }
+
+    public function destroy(TableDeck $tableDeck): RedirectResponse
+    {
+        $tableDeck->delete();
+
+        return back();
     }
 }
