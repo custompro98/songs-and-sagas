@@ -33,7 +33,13 @@ class TableController extends Controller
         $characters = is_null($party) ? [] : $party->characters()->get();
         $tableDeck = $table->tableDeck()->first();
         $deck = $table->deck()->first();
-        $decks = $current_user->decks()->get();
+        $decks = $current_user
+            ->decks()
+            ->with('tableDeck')
+            ->get()
+            ->filter(function ($deck) {
+                return is_null($deck->tableDeck);
+            });
 
         return view('tables.show', [
             'table' => $table,
