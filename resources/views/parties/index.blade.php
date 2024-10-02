@@ -2,12 +2,11 @@
     <div class="flex flex-col gap-2 max-w-screen-lg mx-auto">
         <div class="flex flex-row justify-between items-center">
             <h1 class="text-3xl font-bold">Parties</h1>
-            <button
-                class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
+            <x-primary-button>
                 <a href="{{ route('parties.create') }}">
                     <span>Create</span>
                 </a>
-            </button>
+            </x-primary-button>
         </div>
         <div class="md:flex justify-center hidden">
             @include('partials.parties.table', [

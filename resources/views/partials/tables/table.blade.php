@@ -18,7 +18,7 @@
                     </td>
                 @else
                     <td class="p-2 border-2 border-black">
-                        <span>No heroes <em>yet</em>.</span>
+                        <span>No heroes...<em>yet</em>.</span>
                     </td>
                 @endif
                 <td class="p-2 border-2 border-black whitespace-nowrap overflow-hidden overflow-ellipsis max-w-80">

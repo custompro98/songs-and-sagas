@@ -35,26 +35,17 @@
                     <form hx-post="{{ route('decks.draw', $deck) }}" hx-swap="outerHTML" hx-target="#discard-pile">
                         @csrf
 
-                        <button
-                            class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
-                            Draw
-                        </button>
+                        <x-primary-button>Draw</x-primary-button>
                     </form>
                     <form action="{{ route('decks.recall', $deck) }}" method="POST">
                         @csrf
 
-                        <button
-                            class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
-                            Recall
-                        </button>
+                        <x-primary-button>Recall</x-primary-button>
                     </form>
                     <form action="{{ route('decks.shuffle', $deck) }}" method="POST">
                         @csrf
 
-                        <button
-                            class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
-                            Shuffle
-                        </button>
+                        <x-primary-button>Shuffle</x-primary-button>
                     </form>
                 </div>
                 @fragment('fragments.decks.show.discard_pile')
@@ -94,10 +85,7 @@
                                                 </select>
                                             </div>
 
-                                            <button
-                                                class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 max-w-fit">
-                                                Send
-                                            </button>
+                                            <x-primary-button class="max-w-fit">Send</x-primary-button>
                                         </form>
                                     </div>
                                 </x-modal>
