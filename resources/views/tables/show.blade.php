@@ -3,6 +3,9 @@
         <div class="flex flex-row justify-between items-center">
             <h1 class="text-3xl font-bold">{{ $table->name }}</h1>
             <div class="flex flex-row gap-2">
+                <form action="{{ route('tables.edit', $table->id) }}">
+                    <x-secondary-button type="submit">Edit</x-secondary-button>
+                </form>
                 <form action="{{ route('tables.destroy', $table->id) }}">
                     <x-danger-button>Delete</x-danger-button>
                 </form>

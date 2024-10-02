@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TableStoreRequest;
+use App\Http\Requests\TableUpdateRequest;
 use App\Models\Table;
 use Auth;
 use DB;
@@ -55,6 +56,18 @@ class TableController extends Controller
         $current_user = Auth::user();
 
         $table = $current_user->tables()->create($request->validated());
+
+        return redirect(route('tables.show', $table->id));
+    }
+
+    public function edit(Table $table): View
+    {
+        return view('tables.edit', ['table' => $table]);
+    }
+
+    public function update(TableUpdateRequest $request, Table $table): RedirectResponse
+    {
+        $table->update($request->validated());
 
         return redirect(route('tables.show', $table->id));
     }
