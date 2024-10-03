@@ -52,14 +52,59 @@
             </section>
             <section>
                 <h2 class="text-2xl font-medium">Characters</h2>
-                <div class="md:flex justify-center hidden pt-2">
+                <div class="lg:flex justify-center hidden pt-2">
                     @include('partials.characters.table', [
                         'characters' => $characters,
                         'includeCreate' => false,
                     ])
                 </div>
-                <div class="md:hidden">
+                <div class="lg:hidden">
                     @include('partials.characters.list', ['characters' => $characters])
+                </div>
+            </section>
+            <section x-data="{
+                rolls: [],
+                rolldN(n) {
+                    this.rolls = [
+                        { face: n, value: Math.floor(Math.random() * n) + 1 },
+                        ...this.rolls
+                    ];
+                }
+            }">
+                <div class="flex justify-between">
+                    <h2 class="text-2xl font-medium">Tray</h2>
+                    <button x-on:click="rolls = []">
+                        <x-icon-x-mark class="size-6 inline text-red-700" />
+                    </button>
+                </div>
+                <div class="pt-2 flex flex-row gap-8">
+                    <div class="grid grid-cols-2 gap-2">
+                        @foreach ([2, 4, 6, 8, 10, 12, 20, 100] as $face)
+                            <x-secondary-button class="w-16" x-on:click="rolldN({{ $face }})">
+                                d{{ $face }}
+                            </x-secondary-button>
+                        @endforeach
+                    </div>
+                    <div class="border-2 border-gray-300 bg-white shadow shadow-gray-300 flex-grow">
+                        <div
+                            class="grid grid-cols-1 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-2 p-2 max-h-36 overflow-y-auto overflow-x-hidden">
+                            <template x-for="roll in rolls">
+                                <div class="flex flex-col gap-1 items-center border border-gray-200 w-16 h-16 p-1"
+                                    :class="{
+                                        'bg-green-100': roll.face === 20 && roll.value === 1,
+                                        'bg-red-100': roll.face === 20 && roll.value === 20,
+                                    }">
+                                    <label class="text-sm text-gray-600">d<span x-text="roll.face"></span></label>
+                                    <span class="text-lg"
+                                        :class="{
+                                            'text-green-700': roll.face === 20 && roll.value === 1,
+                                            'text-red-700': roll.face === 20 && roll.value === 20,
+                                        }"
+                                        x-text="roll.value"></span>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
                 </div>
             </section>
             <section>
@@ -78,6 +123,7 @@
                                 <button>
                                     <x-icon-x-mark class="size-5 text-red-700" />
                                 </button>
+                            </form>
                         </div>
 
                         <div class="flex flex-row gap-2 pt-4">
